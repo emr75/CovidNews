@@ -1,0 +1,45 @@
+﻿@model CovidNews.Models.ViewModels.UpdateVariant
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h4>Variant @Model.variant.VariantName</h4>
+
+<div>
+    <div>@Html.ActionLink("Delete", "DeleteConfirm", new { id = Model.variant.VariantID })</div>
+    <div style="overflow:hidden;">
+        <div style="float:left; marign-right:2%; width:49%;">
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.variant.VariantName)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.variant.VariantName)
+                </dd>
+
+            </dl>
+        </div>
+        <div style="float:left; marign-right:0%; width:49%;">
+            <h4>Countries With Variant:</h4>
+            <div>
+                @foreach (var country in Model.variantincountries)
+                {
+                    <div>
+                        @Html.ActionLink(
+                        country.CountryName,
+                        "Details",
+                        "Country",
+                        new { id = country.CountryID },
+                        new { })
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.variant.VariantID }) |
+    @Html.ActionLink("Back to List", "List")
+</p>

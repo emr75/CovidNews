@@ -1,0 +1,88 @@
+﻿@model CovidNews.Models.ViewModels.UpdateArticle
+
+@{
+    ViewBag.Title = "View";
+}
+
+<h2>Update</h2>
+
+@{
+    //The attribute enctype="multipart/form-data" is required
+    //if you are sending files as part of the HTTP POST request
+}
+@using (Html.BeginForm("Edit", "Article", new { id = Model.article.ArticleID }, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Update Article</h4>
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.article.ArticleID, new { Name = "ArticleID" })
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.article.ArticleName, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.article.ArticleName, new { htmlAttributes = new { @class = "form-control", Name = "ArticleName" } })
+                        @Html.ValidationMessageFor(model => model.article.ArticleName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.article.Publisher, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.article.Publisher, new { htmlAttributes = new { @class = "form-control", Name = "Publisher" } })
+                        @Html.ValidationMessageFor(model => model.article.Publisher, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.article.CountryID, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <select name="CountryID">
+                            @foreach (var country in Model.allcountries)
+                            {
+                                //Auto-selects the country the article is currently assigned to
+                                string selected = "";
+                                if (Model.article.CountryID == country.CountryID)
+                                {
+                                    selected = "";
+                                }
+                                <option value="@country.CountryID" @selected>@country.CountryName</option>
+                            }
+                        </select>
+
+                        @{
+                            //Razor equivalent
+                            /*
+                            @Html.DropDownListFor(
+                                model => model.article.CountryID,
+                                new SelectList(Model.allcountries, "CountryID", "CountryName", Model.article.CountryID),
+                                new { Name = "CountryID" }
+                            )
+                            */
+                        }
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <div class="col-md-12">Picture:</div>
+                    <div class="col-md-12"><input type="file" name="ArticlePic" /></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "List")
+</div>

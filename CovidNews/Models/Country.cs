@@ -21,11 +21,21 @@ namespace CovidNews.Models
 
         public int Vaccinated { get; set; }
 
-
         //A country can have many articles about it
         public ICollection<Article> Articles { get; set; }
 
-        //A team can have many sponsors
+        //A country can have many Variants
         public ICollection<Variant> Variants { get; set; }
+    }
+
+    public class CountryDto
+    {
+        public int CountryID { get; set; }
+
+        [DisplayName("Country Name")]
+        public string CountryName { get; set; }
+        public int Population { get; set; }
+        public int Infected { get; set; }
+        public int Vaccinated { get; set; }
     }
 }

@@ -1,0 +1,42 @@
+﻿@model IEnumerable<CovidNews.Models.ArticleDto>
+
+@{
+    ViewBag.Title = "View";
+}
+
+<h2>Articles</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<div class="record-container">
+    @foreach (var article in Model)
+    {
+        <div class="record">
+            <div class="_record">
+                @{
+                    //Use server rendering to determine an image
+                    string pic = "/Content/Articles/default.jpg";
+                    string alt = "No Picture Provided.";
+                    if (article.ArticleHasPic)
+                    {
+                        pic = "/Content/Articles/" + article.ArticleID + "." + article.PicExtension;
+                        alt = "Picture of " + article.ArticleName;
+                    }
+                }
+                <nav class="linknav">
+                    <span class="editlink">@Html.ActionLink("Edit", "Edit", new { id = article.ArticleID })</span>
+                </nav>
+                <div class="imagecontainer">
+                    <img src="@pic" alt="@alt" />
+                </div>
+                <div class="recordtitle">
+                    @Html.ActionLink(article.ArticleName,
+                   new { id = article.ArticleID })
+                </div>
+
+
+            </div>
+        </div>
+    }
+</div>

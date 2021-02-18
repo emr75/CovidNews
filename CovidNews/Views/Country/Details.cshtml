@@ -1,0 +1,71 @@
+﻿@model CovidNews.Models.ViewModels.ShowCountry
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h4>Country @Model.country.CountryName</h4>
+<div style="overflow:hidden;">
+    <div style="float:left; marign-right:2%; width:49%;">
+
+        <div>@Html.ActionLink("Delete", "DeleteConfirm", new { id = Model.country.CountryID })</div>
+
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.country.CountryName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.country.CountryName)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.country.Population)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.country.Population)
+            </dd>
+
+        </dl>
+    </div>
+    <div style="float:left;margin-right:0%; width:49%;">
+        <div>
+            <h4>Articles:</h4>
+            <div>
+                @foreach (var article in Model.countryarticles)
+                {
+                    <div>
+                        @Html.ActionLink(
+                        article.ArticleName,
+                        "Details",
+                        "Article",
+                        new { id = article.ArticleID },
+                        new { })
+                    </div>
+                }
+            </div>
+        </div>
+        <div>
+            <h4>Variants:</h4>
+            <div>
+                @foreach (var variant in Model.countryvariants)
+                {
+                    <div>
+                        @Html.ActionLink(
+                        variant.VariantName,
+                        "Details",
+                        "Variant",
+                        new { id = variant.VariantID },
+                        new { })
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+    <div style="clear:both;"></div>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.country.CountryID }) |
+    @Html.ActionLink("Back to List", "List")
+</p>

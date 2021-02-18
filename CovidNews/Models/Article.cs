@@ -18,6 +18,11 @@ namespace CovidNews.Models
 
         public string Publisher { get; set; }
 
+        public bool ArticleHasPic { get; set; }
+
+        //If the player has an image, record the extension of the image (.png, .gif, .jpg, etc.)
+        public string PicExtension { get; set; }
+        
         //Foreign keys in Entity Framework
         /// https://www.entityframeworktutorial.net/code-first/foreignkey-dataannotations-attribute-in-code-first.aspx
 
@@ -37,6 +42,9 @@ namespace CovidNews.Models
         public int ArticleID { get; set; }
         public string ArticleName { get; set; }
         public string Publisher { get; set; }
+        public bool ArticleHasPic { get; set; }
+        public string PicExtension { get; set; }
+        public int CountryID { get; set; }
 
 
     }

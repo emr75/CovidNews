@@ -1,0 +1,42 @@
+﻿@model IEnumerable<CovidNews.Models.CountryDto>
+
+@{
+    ViewBag.Title = "View";
+}
+
+<h2>View</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CountryName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Population)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.CountryName)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Population)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.CountryID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.CountryID })
+
+            </td>
+        </tr>
+    }
+
+</table>
