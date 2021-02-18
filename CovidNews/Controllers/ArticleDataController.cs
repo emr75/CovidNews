@@ -125,7 +125,8 @@ namespace CovidNews.Controllers
                 CountryName = Country.CountryName,
                 Population = Country.Population,
                 Infected = Country.Infected,
-                Vaccinated = Country.Vaccinated
+                Vaccinated = Country.Vaccinated,
+                Variants = Country.Variants
 
             };
 

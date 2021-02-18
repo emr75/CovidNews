@@ -16,7 +16,7 @@ namespace CovidNews.Controllers
 {
     public class ArticleController : Controller
     {
-        //Http Client is the proper way to connect to a webapi
+
         //https://docs.microsoft.com/en-us/dotnet/api/system.net.http.httpclient?view=net-5.0
 
         private JavaScriptSerializer jss = new JavaScriptSerializer();
@@ -31,12 +31,12 @@ namespace CovidNews.Controllers
             };
             client = new HttpClient(handler);
             //change this to match your own local port number
-            client.BaseAddress = new Uri("https://localhost:44334/api/");
+            client.BaseAddress = new Uri("https://localhost:56807/api/");
             client.DefaultRequestHeaders.Accept.Add(
             new MediaTypeWithQualityHeaderValue("application/json"));
 
 
-            //client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", ACCESS_TOKEN);
+
 
         }
 
@@ -104,7 +104,7 @@ namespace CovidNews.Controllers
         [ValidateAntiForgeryToken()]
         public ActionResult Create(Article ArticleInfo)
         {
-            Debug.WriteLine(ArticleInfo.ArticleFirstName);
+            Debug.WriteLine(ArticleInfo.ArticleName);
             string url = "articledata/addarticle";
             Debug.WriteLine(jss.Serialize(ArticleInfo));
             HttpContent content = new StringContent(jss.Serialize(ArticleInfo));
@@ -125,7 +125,7 @@ namespace CovidNews.Controllers
 
         }
 
-        // GET: Article/Edit/5
+        // GET: Article/Edit/8
         public ActionResult Edit(int id)
         {
             UpdateArticle ViewModel = new UpdateArticle();
@@ -154,12 +154,12 @@ namespace CovidNews.Controllers
             }
         }
 
-        // POST: Article/Edit/5
+        // POST: Article/Edit/2
         [HttpPost]
         [ValidateAntiForgeryToken()]
         public ActionResult Edit(int id, Article ArticleInfo, HttpPostedFileBase ArticlePic)
         {
-            Debug.WriteLine(ArticleInfo.ArticleFirstName);
+            Debug.WriteLine(ArticleInfo.ArticleName);
             string url = "articledata/updatearticle/" + id;
             Debug.WriteLine(jss.Serialize(ArticleInfo));
             HttpContent content = new StringContent(jss.Serialize(ArticleInfo));

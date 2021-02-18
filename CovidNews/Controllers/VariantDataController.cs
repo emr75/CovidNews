@@ -29,7 +29,7 @@ namespace CovidNews.Controllers
         /// <summary>
         /// Gets a list or Variants in the database alongside a status code (200 OK).
         /// </summary>
-        /// <returns>A list of Variants including their ID, name, and URL.</returns>
+        /// <returns>A list of Variants including their ID and name.</returns>
         /// <example>
         /// GET: api/VariantData/GetVariants
         /// </example>
@@ -45,8 +45,7 @@ namespace CovidNews.Controllers
                 VariantDto NewVariant = new VariantDto
                 {
                     VariantID = Variant.VariantID,
-                    VariantName = Variant.VariantName,
-                    Countries = Variant.Countries
+                    VariantName = Variant.VariantName
                 };
                 VariantDtos.Add(NewVariant);
             }
@@ -58,7 +57,7 @@ namespace CovidNews.Controllers
         /// Gets a list or Countries in the database associated with a particular variant. Returns a status code (200 OK)
         /// </summary>
         /// <param name="id">The input variant id</param>
-        /// <returns>A list of Countries including their ID, name, and URL.</returns>
+        /// <returns>A list of Countries including their ID and name</returns>
         /// <example>
         /// GET: api/CountryData/GetCountriesPotentiallyWithVariant
         /// </example>
@@ -84,7 +83,6 @@ namespace CovidNews.Controllers
                     Population = Country.Population,
                     Infected = Country.Infected,
                     Vaccinated = Country.Vaccinated,
-                    Articles = Country.Articles,
                     Variants = Country.Variants
                 };
                 CountryDtos.Add(NewCountry);
@@ -97,7 +95,7 @@ namespace CovidNews.Controllers
         /// Gets a list or Countries in the database NOT associated with a variant. These could be potentially sponsored countries.
         /// </summary>
         /// <param name="id">The input variant id</param>
-        /// <returns>A list of Countries including their ID, name, and URL.</returns>
+        /// <returns>A list of Countries including their ID and name</returns>
         /// <example>
         /// GET: api/CountryData/GetCountriesPotentiallyWithVariant
         /// </example>
@@ -112,13 +110,13 @@ namespace CovidNews.Controllers
             //Here you can choose which information is exposed to the API
             foreach (var Country in Countries)
             {
+                CountryDto NewCountry = new CountryDto
                 {
-                    CountryID = Country.CountryID,
+                CountryID = Country.CountryID,
                 CountryName = Country.CountryName,
                 Population = Country.Population,
                 Infected = Country.Infected,
                 Vaccinated = Country.Vaccinated,
-                Articles = Country.Articles,
                 Variants = Country.Variants
                 };
                 CountryDtos.Add(NewCountry);
@@ -131,7 +129,7 @@ namespace CovidNews.Controllers
         /// Finds a particular Variant in the database with a 200 status code. If the Variant is not found, return 404.
         /// </summary>
         /// <param name="id">The Variant id</param>
-        /// <returns>Information about the Variant, including Variant id, bio, first and last name, and countryid</returns>
+        /// <returns>Information about the Variant, including Variant and name</returns>
         // <example>
         // GET: api/VariantData/FindVariant/5
         // </example>
@@ -151,8 +149,7 @@ namespace CovidNews.Controllers
             VariantDto VariantDto = new VariantDto
             {
                 VariantID = Variant.VariantID,
-                VariantName = Variant.VariantName,
-                Countries = Variant.Countries
+                VariantName = Variant.VariantName
             };
 
 
@@ -254,77 +251,85 @@ namespace CovidNews.Controllers
             return Ok();
         }
 
-        /// <summary>
-        /// Deletes a relationship between a particular country and a variant
-        /// </summary>
-        /// <param name="countryid">The country id</param>
-        /// <param name="variantid">The Variant id</param>
-        /// <returns>status code of 200 OK</returns>
-        [HttpGet]
-        [Route("api/variantdata/novariant/{countryid}/{variantid}")]
-        public IHttpActionResult Novariant(int countryid, int variantid)
-        {
-            //First select the variant (also loading in country data)
-            Variant SelectedVariant = db.Variants
-                .Include(v => v.Countries)
-                .Where(v => v.VariantID == variantid)
-                .FirstOrDefault();
 
-            //Then select the country
-            Country SelectedCountry = db.Countries.Find(countryid);
 
-            //Debug.WriteLine("Selected Variant is.. " + SelectedVariant.VariantName);
-            //Debug.WriteLine("Selected Country is.. " + SelectedCountry.CountryName);
 
-            if (SelectedVariant == null || SelectedCountry == null || !SelectedVariant.Countries.Contains(SelectedCountry))
-            {
+        ///// <summary>
+        ///// Deletes a relationship between a particular country and a variant
+        ///// </summary>
+        ///// <param name="countryid">The country id</param>
+        ///// <param name="variantid">The Variant id</param>
+        ///// <returns>status code of 200 OK</returns>
+        //[HttpGet]
+        //[Route("api/variantdata/novariant/{countryid}/{variantid}")]
+        //public IHttpActionResult Novariant(int countryid, int variantid)
+        //{
+        //    //First select the variant (also loading in country data)
+        //    Variant SelectedVariant = db.Variants
+        //        .Include(v => v.Countries)
+        //        .Where(v => v.VariantID == variantid)
+        //        .FirstOrDefault();
 
-                return NotFound();
-            }
-            else
-            {
-                //Remove the variant from the country
-                SelectedVariant.Countries.Remove(SelectedCountry);
-                db.SaveChanges();
-                return Ok();
-            }
-        }
+        //    //Then select the country
+        //    Country SelectedCountry = db.Countries.Find(countryid);
 
-        /// <summary>
-        /// Adds a relationship between a particular country and a variant
-        /// </summary>
-        /// <param name="countryid">The country id</param>
-        /// <param name="variantid">The Variant id</param>
-        /// <returns>status code of 200 OK</returns>
-        [HttpGet]
-        [Route("api/variantdata/variant/{countryid}/{variantid}")]
-        public IHttpActionResult Variant(int countryid, int variantid)
-        {
-            //First select the variant (also loading in country data)
-            Variant SelectedVariant = db.Variants
-                .Include(v => v.Countries)
-                .Where(v => v.VariantID == variantid)
-                .FirstOrDefault();
+        //    //Debug.WriteLine("Selected Variant is.. " + SelectedVariant.VariantName);
+        //    //Debug.WriteLine("Selected Country is.. " + SelectedCountry.CountryName);
 
-            //Then select the country
-            Country SelectedCountry = db.Countries.Find(countryid);
+        //    if (SelectedVariant == null || SelectedCountry == null || !SelectedVariant.Countries.Contains(SelectedCountry))
+        //    {
 
-            //Debug.WriteLine("Selected Variant Variant is.. " + SelectedVariant.VariantName);
-            //Debug.WriteLine("Selected Country is.. " + SelectedCountry.CountryName);
+        //        return NotFound();
+        //    }
+        //    else
+        //    {
+        //        //Remove the variant from the country
+        //        SelectedVariant.Countries.Remove(SelectedCountry);
+        //        db.SaveChanges();
+        //        return Ok();
+        //    }
+        //}
 
-            if (SelectedVariant == null || SelectedCountry == null || SelectedVariant.Countries.Contains(SelectedCountry))
-            {
 
-                return NotFound();
-            }
-            else
-            {
-                //Remove the variant from the country
-                SelectedVariant.Countries.Add(SelectedCountry);
-                db.SaveChanges();
-                return Ok();
-            }
-        }
+
+        ///// <summary>
+        ///// Adds a relationship between a particular country and a variant
+        ///// </summary>
+        ///// <param name="countryid">The country id</param>
+        ///// <param name="variantid">The Variant id</param>
+        ///// <returns>status code of 200 OK</returns>
+        //[HttpGet]
+        //[Route("api/variantdata/variant/{countryid}/{variantid}")]
+        //public IHttpActionResult Variant(int countryid, int variantid)
+        //{
+        //    //First select the variant (also loading in country data)
+        //    Variant SelectedVariant = db.Variants
+        //        .Include(v => v.Countries)
+        //        .Where(v => v.VariantID == variantid)
+        //        .FirstOrDefault();
+
+        //    //Then select the country
+        //    Country SelectedCountry = db.Countries.Find(countryid);
+
+        //    //Debug.WriteLine("Selected Variant Variant is.. " + SelectedVariant.VariantName);
+        //    //Debug.WriteLine("Selected Country is.. " + SelectedCountry.CountryName);
+
+        //    if (SelectedVariant == null || SelectedCountry == null || SelectedVariant.Countries.Contains(SelectedCountry))
+        //    {
+
+        //        return NotFound();
+        //    }
+        //    else
+        //    {
+        //        //Remove the variant from the country
+        //        SelectedVariant.Countries.Add(SelectedCountry);
+        //        db.SaveChanges();
+        //        return Ok();
+        //    }
+        //}
+
+
+
 
         protected override void Dispose(bool disposing)
         {

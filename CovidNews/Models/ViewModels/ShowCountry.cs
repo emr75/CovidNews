@@ -7,6 +7,7 @@ namespace CovidNews.Models.ViewModels
 {
     public class ShowCountry
     {
+
         //Information about the country
         public CountryDto country { get; set; }
 
@@ -14,6 +15,6 @@ namespace CovidNews.Models.ViewModels
         public IEnumerable<ArticleDto> countryarticles { get; set; }
 
         //Information about all variants for that country
-        public IEnumerable<VariantDto> countriesvariants { get; set; }
+        public IEnumerable<VariantDto> countryvariants { get; set; }
     }
 }

@@ -7,7 +7,6 @@ using CovidNews.Models;
 using CovidNews.Models.ViewModels;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Diagnostics;
 using System.Web.Script.Serialization;
 
 namespace CovidNews.Controllers
@@ -29,7 +28,7 @@ namespace CovidNews.Controllers
             };
             client = new HttpClient(handler);
             //change this to match your own local port number
-            client.BaseAddress = new Uri("https://localhost:44334/api/");
+            client.BaseAddress = new Uri("https://localhost:56807/api/");
             client.DefaultRequestHeaders.Accept.Add(
             new MediaTypeWithQualityHeaderValue("application/json"));
 
@@ -100,9 +99,9 @@ namespace CovidNews.Controllers
         [ValidateAntiForgeryToken()]
         public ActionResult Create(Variant VariantInfo)
         {
-            Debug.WriteLine(VariantInfo.VariantName);
+            //Debug.WriteLine(VariantInfo.VariantName);
             string url = "variantdata/addvariant";
-            Debug.WriteLine(jss.Serialize(VariantInfo));
+            //Debug.WriteLine(jss.Serialize(VariantInfo));
             HttpContent content = new StringContent(jss.Serialize(VariantInfo));
             content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
             HttpResponseMessage response = client.PostAsync(url, content).Result;
@@ -207,22 +206,22 @@ namespace CovidNews.Controllers
         [ValidateAntiForgeryToken()]
         public ActionResult Edit(int id, Variant VariantInfo)
         {
-            Debug.WriteLine(VariantInfo.VariantName);
+            //Debug.WriteLine(VariantInfo.VariantName);
             string url = "variantdata/updatevariant/" + id;
-            Debug.WriteLine(jss.Serialize(VariantInfo));
+            //Debug.WriteLine(jss.Serialize(VariantInfo));
             HttpContent content = new StringContent(jss.Serialize(VariantInfo));
             content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
             HttpResponseMessage response = client.PostAsync(url, content).Result;
 
             if (response.IsSuccessStatusCode)
             {
-                Debug.WriteLine("update variant request succeeded");
+                //Debug.WriteLine("update variant request succeeded");
                 return RedirectToAction("Details", new { id = id });
             }
             else
             {
-                Debug.WriteLine("update variant request failed");
-                Debug.WriteLine(response.StatusCode.ToString());
+                //Debug.WriteLine("update variant request failed");
+                //Debug.WriteLine(response.StatusCode.ToString());
                 return RedirectToAction("Error");
             }
         }

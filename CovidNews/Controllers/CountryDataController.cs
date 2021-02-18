@@ -48,7 +48,8 @@ namespace CovidNews.Controllers
                     CountryName = Country.CountryName,
                     Population = Country.Population,
                     Infected = Country.Infected,
-                    Vaccinated = Country.Vaccinated
+                    Vaccinated = Country.Vaccinated,
+                    Variants = Country.Variants
                 };
                 CountryDtos.Add(NewCountry);
             }
@@ -112,8 +113,7 @@ namespace CovidNews.Controllers
                 VariantDto NewVariant = new VariantDto
                 {
                     VariantID = Variant.VariantID,
-                    VariantName = Variant.VariantName,
-                    Countries = Variant.Countries
+                    VariantName = Variant.VariantName
                 };
                 VariantDtos.Add(NewVariant);
             }
@@ -149,7 +149,6 @@ namespace CovidNews.Controllers
                 Population = Country.Population,
                 Infected = Country.Infected,
                 Vaccinated = Country.Vaccinated,
-                Articles = Country.Articles,
                 Variants = Country.Variants
             };
 
