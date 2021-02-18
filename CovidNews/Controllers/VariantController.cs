@@ -55,7 +55,7 @@ namespace CovidNews.Controllers
             }
         }
 
-        // GET: Variant/Details/5
+        // GET: Variant/Details/2
         public ActionResult Details(int id)
         {
             UpdateVariant ViewModel = new UpdateVariant();

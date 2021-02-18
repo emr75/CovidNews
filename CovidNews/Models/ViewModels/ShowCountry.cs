@@ -9,12 +9,12 @@ namespace CovidNews.Models.ViewModels
     {
 
         //Information about the country
-        public CountryDto country { get; set; }
+        public CountryDto Country { get; set; }
 
         //Information about all articles about that country
-        public IEnumerable<ArticleDto> countryarticles { get; set; }
+        public IEnumerable<ArticleDto> Countryarticles { get; set; }
 
         //Information about all variants for that country
-        public IEnumerable<VariantDto> countryvariants { get; set; }
+        public IEnumerable<VariantDto> Countryvariants { get; set; }
     }
 }

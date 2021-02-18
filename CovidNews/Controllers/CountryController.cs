@@ -17,7 +17,7 @@ namespace CovidNews.Controllers
         //Http Client is the proper way to connect to a webapi
         //https://docs.microsoft.com/en-us/dotnet/api/system.net.http.httpclient?view=net-5.0
 
-        private JavaScriptSerializer jss = new JavaScriptSerializer();
+        private readonly JavaScriptSerializer jss = new JavaScriptSerializer();
         private static readonly HttpClient client;
 
 
@@ -68,7 +68,7 @@ namespace CovidNews.Controllers
             {
                 //Put data into Country data transfer object
                 CountryDto SelectedCountry = response.Content.ReadAsAsync<CountryDto>().Result;
-                ViewModel.country = SelectedCountry;
+                ViewModel.Country = SelectedCountry;
 
                 //We don't need to throw any errors if this is null
                 //A country not having any articles is not an issue.
@@ -77,7 +77,7 @@ namespace CovidNews.Controllers
                 //Can catch the status code (200 OK, 301 REDIRECT), etc.
                 //Debug.WriteLine(response.StatusCode);
                 IEnumerable<ArticleDto> SelectedArticles = response.Content.ReadAsAsync<IEnumerable<ArticleDto>>().Result;
-                ViewModel.countryarticles = SelectedArticles;
+                ViewModel.Countryarticles = SelectedArticles;
 
 
                 url = "countrydata/getvariantsforcountry/" + id;
@@ -86,7 +86,7 @@ namespace CovidNews.Controllers
                 //Debug.WriteLine(response.StatusCode);
                 //Put data into Country data transfer object
                 IEnumerable<VariantDto> SelectedVariants = response.Content.ReadAsAsync<IEnumerable<VariantDto>>().Result;
-                ViewModel.countryvariants = SelectedVariants;
+                ViewModel.Countryvariants = SelectedVariants;
 
                 return View(ViewModel);
             }
@@ -161,7 +161,7 @@ namespace CovidNews.Controllers
 
             if (response.IsSuccessStatusCode)
             {
-                return RedirectToAction("Details", new { id = id });
+                return RedirectToAction("Details", new { id });
             }
             else
             {

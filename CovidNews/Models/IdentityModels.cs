@@ -21,7 +21,7 @@ namespace CovidNews.Models
     public class CovidDataContext : IdentityDbContext<ApplicationUser>
     {
         public CovidDataContext()
-            : base("name=VarsityDataContextwAuth", throwIfV1Schema: false)
+            : base("name=CovidDataContext", throwIfV1Schema: false)
         {
         }
 
