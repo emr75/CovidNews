@@ -17,18 +17,10 @@ namespace CovidNews.Controllers
 {
     public class ArticleDataController : ApiController
     {
-        //This variable is our database access point
+
         private CovidDataContext db = new CovidDataContext();
 
-        //This code is mostly scaffolded from the base models and database context
-        //New > WebAPIController with Entity Framework Read/Write Actions
-        //Choose model "Article"
-        //Choose context "Covid Data Context"
-        //Note: The base scaffolded code needs many improvements for a fully
-        //functioning MVP.
-
-
-        /// <summary>
+        /// <summary>Needs more
         /// Gets a list or articles in the database alongside a status code (200 OK).
         /// </summary>
         /// <returns>A list of articles including their ID, bio, first name, last name, and countryid.</returns>
@@ -41,7 +33,7 @@ namespace CovidNews.Controllers
             List<Article> Articles = db.Articles.ToList();
             List<ArticleDto> ArticleDtos = new List<ArticleDto> { };
 
-            //Here you can choose which information is exposed to the API
+
             foreach (var Article in Articles)
             {
                 ArticleDto NewArticle = new ArticleDto
@@ -79,7 +71,7 @@ namespace CovidNews.Controllers
                 return NotFound();
             }
 
-            //put into a 'friendly object format'
+
             ArticleDto ArticleDto = new ArticleDto
             {
                 ArticleID = Article.ArticleID,
@@ -338,3 +330,4 @@ namespace CovidNews.Controllers
     }
 
 }
+

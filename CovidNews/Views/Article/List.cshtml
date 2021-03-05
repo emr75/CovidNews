@@ -1,0 +1,29 @@
+﻿@model IEnumerable<CovidNews.Models.ArticleDto>
+
+@{
+    ViewBag.Title = "View";
+}
+
+<h2>Articles</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<div class="record-container">
+   @foreach (var article in Model)
+    {
+        <div class="record">
+            <div class="_record">
+                <nav class="linknav">
+                    <span class="editlink">@Html.ActionLink("Edit", "Edit", new { id = article.ArticleID })</span>
+                </nav>
+                <div class="recordtitle">
+                    <h1>@article.Publisher </h1> 
+                    @article.ArticleName
+                </div>
+
+
+            </div>
+        </div>
+    }
+</div>

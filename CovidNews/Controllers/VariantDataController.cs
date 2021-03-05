@@ -15,18 +15,10 @@ namespace CovidNews.Controllers
 {
     public class VariantDataController : ApiController
     {
-        //This variable is our database access point
+
         private CovidDataContext db = new CovidDataContext();
 
-        //This code is mostly scaffolded from the base models and database context
-        //New > WebAPIController with Entity Framework Read/Write Actions
-        //Choose model "Variant"
-        //Choose context "Covid Data Context"
-        //Note: The base scaffolded code needs many improvements for a fully
-        //functioning MVP.
-
-
-        /// <summary>
+        /// <summary>Needs more
         /// Gets a list or Variants in the database alongside a status code (200 OK).
         /// </summary>
         /// <returns>A list of Variants including their ID and name.</returns>
@@ -39,7 +31,6 @@ namespace CovidNews.Controllers
             List<Variant> Variants = db.Variants.ToList();
             List<VariantDto> VariantDtos = new List<VariantDto> { };
 
-            //Here you can choose which information is exposed to the API
             foreach (var Variant in Variants)
             {
                 VariantDto NewVariant = new VariantDto
@@ -73,7 +64,7 @@ namespace CovidNews.Controllers
                 .ToList();
             List<CountryDto> CountryDtos = new List<CountryDto> { };
 
-            //Here you can choose which information is exposed to the API
+
             foreach (var Country in Countries)
             {
                 CountryDto NewCountry = new CountryDto

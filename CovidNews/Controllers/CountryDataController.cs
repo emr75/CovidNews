@@ -15,18 +15,10 @@ namespace CovidNews.Controllers
 {
     public class CountryDataController : ApiController
     {
-        //This variable is our database access point
         private CovidDataContext db = new CovidDataContext();
 
-        //This code is mostly scaffolded from the base models and database context
-        //New > WebAPIController with Entity Framework Read/Write Actions
-        //Choose model "Country"
-        //Choose context "Covid Data Context"
-        //Note: The base scaffolded code needs many improvements for a fully
-        //functioning MVP.
 
-
-        /// <summary>
+        /// <summary>Needs more
         /// Gets a list or Countries in the database alongside a status code (200 OK).
         /// </summary>
         /// <returns>A list of Countries including their ID, name, and URL.</returns>
@@ -36,12 +28,15 @@ namespace CovidNews.Controllers
         [ResponseType(typeof(IEnumerable<CountryDto>))]
         public IHttpActionResult GetCountries()
         {
+            
             List<Country> Countries = db.Countries.ToList();
             List<CountryDto> CountryDtos = new List<CountryDto> { };
 
-            //Here you can choose which information is exposed to the API
+
             foreach (var Country in Countries)
             {
+                Console.WriteLine("country object-" + Country);
+
                 CountryDto NewCountry = new CountryDto
                 {
                     CountryID = Country.CountryID,
