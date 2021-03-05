@@ -1,29 +1,51 @@
 ﻿@model IEnumerable<CovidNews.Models.ArticleDto>
-
+<head>
+    <link rel="stylesheet" href="~/Content/Articles/articles.css">
+    <link rel="stylesheet" href="~/Content/Site.css">
+</head>
 @{
     ViewBag.Title = "View";
 }
+<div id="topBanner">
 
-<h2>Articles</h2>
+<h2 class="water">Breaking Covid News</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+</div>
+
 <div class="record-container">
    @foreach (var article in Model)
     {
-        <div class="record">
-            <div class="_record">
-                <nav class="linknav">
-                    <span class="editlink">@Html.ActionLink("Edit", "Edit", new { id = article.ArticleID })</span>
-                </nav>
-                <div class="recordtitle">
-                    <h1>@article.Publisher </h1> 
-                    @article.ArticleName
+
+                <div class="record">
+                    <div class="_record">
+                        @{
+                            //Use server rendering to determine an image
+                            string pic = "/Content/Articles/default.jpg";
+                            string alt = "No Picture Provided.";
+                            if (article.ArticleHasPic)
+                            {
+                                pic = "/Content/Articles/" + article.ArticleID + "." + article.PicExtension;
+                                alt = "Picture of " + article.ArticleName;
+                            }
+                        }
+                        <div class="linknav">
+                            <span class="editlink">@Html.ActionLink("Edit", "Edit", new { id = article.ArticleID })</span>
+                            <span class="editlink">@Html.ActionLink("Delete", "DeleteConfirm", new { id = article.ArticleID })</span>
+                        </div>
+                        <div class="imagecontainer">
+                            <img src="@pic" alt="@alt" />
+                        </div>
+                        <div class="recordtitle">
+                            <h1>@article.Publisher </h1>
+                            @article.ArticleName
+                            @article.PicExtension
+                        </div>
+
+
+                    </div>
                 </div>
-
-
+                }
             </div>
-        </div>
-    }
-</div>
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>

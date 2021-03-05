@@ -1,0 +1,15 @@
+﻿#topBanner {
+    width: 100%;
+    height: 26em;
+    background-image: linear-gradient(to bottom right, red, #886362);
+    font-style: italic;
+    text-align: center;
+}
+.water {
+    padding-top: 129px;
+    font-size: 90px;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+    color: white;
+}
+
+

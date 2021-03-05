@@ -1,14 +1,23 @@
 ﻿﻿body {
     padding-top: 50px;
     padding-bottom: 20px;
+    background-color: lightgray;
 }
-
 /* Set padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
 }
-
+.mainNav {
+    background-color: #8b0000;
+}
+.mainNav a {
+    color: black;
+    font-size: x-large;
+}
+nav .navbar-nav li:first-child {
+    font-size: xx-large;
+}
 /* Override the default bootstrap behavior where horizontal description lists 
    will truncate terms that are too long to fit in the left column 
 */

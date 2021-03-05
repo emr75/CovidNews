@@ -30,7 +30,7 @@ namespace CovidNews.Controllers
                 AllowAutoRedirect = false
             };
             client = new HttpClient(handler);
-            //change this to match your own local port number
+
             client.BaseAddress = new Uri("http://localhost:56807/api/");
             client.DefaultRequestHeaders.Accept.Add(
             new MediaTypeWithQualityHeaderValue("application/json"));
@@ -171,7 +171,7 @@ namespace CovidNews.Controllers
             {
 
                 //Send over image data for article
-                url = "articledata/updateplayerpic/" + id;
+                url = "articledata/updatearticlepic/" + id;
                 Debug.WriteLine("Received article picture " + ArticlePic.FileName);
 
                 MultipartFormDataContent requestcontent = new MultipartFormDataContent();

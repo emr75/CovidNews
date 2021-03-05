@@ -296,7 +296,7 @@ namespace CovidNews.Controllers
                 return NotFound();
             }
             //also delete image from path
-            string path = HttpContext.Current.Server.MapPath("~/Content/Articles/" + id + "." + article.PicExtension);
+            string path = HttpContext.Current.Server.MapPath("~/Content/Articles/" + id + article.PicExtension);
             if (System.IO.File.Exists(path))
             {
                 Debug.WriteLine("File exists... preparing to delete!");
