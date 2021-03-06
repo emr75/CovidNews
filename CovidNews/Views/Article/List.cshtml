@@ -7,8 +7,11 @@
     ViewBag.Title = "View";
 }
 <div id="topBanner">
-
-<h2 class="water">Breaking Covid News</h2>
+    <h2 class="water">Breaking Covid News</h2>
+    <video autoplay muted loop id="myVideo">
+        <source src="~/Content/Articles/virusVideo.mp4" type="video/mp4">
+        Your browser does not support HTML5 video.
+    </video>
 
 </div>
 
@@ -20,7 +23,7 @@
                     <div class="_record">
                         @{
                             //Use server rendering to determine an image
-                            string pic = "/Content/Articles/default.jpg";
+                            string pic = "/Content/Articles/globe.jpg";
                             string alt = "No Picture Provided.";
                             if (article.ArticleHasPic)
                             {
@@ -28,11 +31,7 @@
                                 alt = "Picture of " + article.ArticleName;
                             }
                         }
-                        <div class="linknav">
-                            <span class="editlink">@Html.ActionLink("Edit", "Edit", new { id = article.ArticleID })</span>
-                            <span class="editlink">@Html.ActionLink("Delete", "DeleteConfirm", new { id = article.ArticleID })</span>
-                        </div>
-                        <div class="imagecontainer">
+                        <div class="contain">
                             <img src="@pic" alt="@alt" />
                         </div>
                         <div class="recordtitle">
@@ -40,12 +39,15 @@
                             @article.ArticleName
                             @article.PicExtension
                         </div>
-
+                        <div class="linknav">
+                            <span class="editlink">@Html.ActionLink("Details", "Details", new { id = article.ArticleID })</span>
+                            <span class="editlink">@Html.ActionLink("Delete", "DeleteConfirm", new { id = article.ArticleID })</span>
+                        </div>
 
                     </div>
                 </div>
                 }
+<div class="record _record" id="createNew">
+    <h3>@Html.ActionLink("Create New", "Create")</h3>
+</div>
             </div>
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>

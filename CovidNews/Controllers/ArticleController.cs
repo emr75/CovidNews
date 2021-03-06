@@ -17,7 +17,7 @@ namespace CovidNews.Controllers
     public class ArticleController : Controller
     {
 
-        //https://docs.microsoft.com/en-us/dotnet/api/system.net.http.httpclient?view=net-5.0
+
 
         private JavaScriptSerializer jss = new JavaScriptSerializer();
         private static readonly HttpClient client;
@@ -66,10 +66,10 @@ namespace CovidNews.Controllers
             string url = "articledata/findarticle/" + id;
             HttpResponseMessage response = client.GetAsync(url).Result;
             //Can catch the status code (200 OK, 301 REDIRECT), etc.
-            //Debug.WriteLine(response.StatusCode);
+
             if (response.IsSuccessStatusCode)
             {
-                //Put data into article data transfer object
+                //Article goes in Data Transfer Object
                 ArticleDto SelectedArticle = response.Content.ReadAsAsync<ArticleDto>().Result;
                 ViewModel.article = SelectedArticle;
 
@@ -91,7 +91,7 @@ namespace CovidNews.Controllers
         public ActionResult Create()
         {
             UpdateArticle ViewModel = new UpdateArticle();
-            //get information about teams this article COULD play for.
+            //get information about countries this article could also include
             string url = "countrydata/getcountries";
             HttpResponseMessage response = client.GetAsync(url).Result;
             IEnumerable<CountryDto> PotentialCountries = response.Content.ReadAsAsync<IEnumerable<CountryDto>>().Result;
@@ -133,15 +133,15 @@ namespace CovidNews.Controllers
 
             string url = "articledata/findarticle/" + id;
             HttpResponseMessage response = client.GetAsync(url).Result;
-            //Can catch the status code (200 OK, 301 REDIRECT), etc.
-            //Debug.WriteLine(response.StatusCode);
+
+
             if (response.IsSuccessStatusCode)
             {
                 //Put data into article data transfer object
                 ArticleDto SelectedArticle = response.Content.ReadAsAsync<ArticleDto>().Result;
                 ViewModel.article = SelectedArticle;
 
-                //get information about teams this article COULD play for.
+                //get information about countries this article could also include
                 url = "countrydata/getcountries";
                 response = client.GetAsync(url).Result;
                 IEnumerable<CountryDto> PotentialCountries = response.Content.ReadAsAsync<IEnumerable<CountryDto>>().Result;
@@ -193,8 +193,7 @@ namespace CovidNews.Controllers
         {
             string url = "articledata/findarticle/" + id;
             HttpResponseMessage response = client.GetAsync(url).Result;
-            //Can catch the status code (200 OK, 301 REDIRECT), etc.
-            //Debug.WriteLine(response.StatusCode);
+
             if (response.IsSuccessStatusCode)
             {
                 //Put data into article data transfer object
@@ -213,11 +212,10 @@ namespace CovidNews.Controllers
         public ActionResult Delete(int id)
         {
             string url = "articledata/deletearticle/" + id;
-            //post body is empty
+
             HttpContent content = new StringContent("");
             HttpResponseMessage response = client.PostAsync(url, content).Result;
-            //Can catch the status code (200 OK, 301 REDIRECT), etc.
-            //Debug.WriteLine(response.StatusCode);
+
             if (response.IsSuccessStatusCode)
             {
 

@@ -14,8 +14,7 @@ namespace CovidNews.Controllers
 {
     public class CountryController : Controller
     {
-        //Http Client is the proper way to connect to a webapi
-        //https://docs.microsoft.com/en-us/dotnet/api/system.net.http.httpclient?view=net-5.0
+
 
         private readonly JavaScriptSerializer jss = new JavaScriptSerializer();
         private static readonly HttpClient client;
@@ -28,13 +27,11 @@ namespace CovidNews.Controllers
                 AllowAutoRedirect = false
             };
             client = new HttpClient(handler);
-            //change this to match your own local port number
+
             client.BaseAddress = new Uri("http://localhost:56807/api/");
             client.DefaultRequestHeaders.Accept.Add(
             new MediaTypeWithQualityHeaderValue("application/json"));
 
-
-            //client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", ACCESS_TOKEN);
 
         }
 
@@ -63,27 +60,25 @@ namespace CovidNews.Controllers
             string url = "countrydata/findcountry/" + id;
             HttpResponseMessage response = client.GetAsync(url).Result;
             //Can catch the status code (200 OK, 301 REDIRECT), etc.
-            //Debug.WriteLine(response.StatusCode);
+
             if (response.IsSuccessStatusCode)
             {
-                //Put data into Country data transfer object
+                //Country goes in Data Transfer Object
                 CountryDto SelectedCountry = response.Content.ReadAsAsync<CountryDto>().Result;
-                ViewModel.Country = SelectedCountry;
+                ViewModel.country = SelectedCountry;
 
-                //We don't need to throw any errors if this is null
-                //A country not having any articles is not an issue.
+                //Find articles about this country
                 url = "countrydata/getarticlesforcountry/" + id;
                 response = client.GetAsync(url).Result;
                 //Can catch the status code (200 OK, 301 REDIRECT), etc.
-                //Debug.WriteLine(response.StatusCode);
+
                 IEnumerable<ArticleDto> SelectedArticles = response.Content.ReadAsAsync<IEnumerable<ArticleDto>>().Result;
                 ViewModel.Countryarticles = SelectedArticles;
 
 
                 url = "countrydata/getvariantsforcountry/" + id;
                 response = client.GetAsync(url).Result;
-                //Can catch the status code (200 OK, 301 REDIRECT), etc.
-                //Debug.WriteLine(response.StatusCode);
+
                 //Put data into Country data transfer object
                 IEnumerable<VariantDto> SelectedVariants = response.Content.ReadAsAsync<IEnumerable<VariantDto>>().Result;
                 ViewModel.Countryvariants = SelectedVariants;
@@ -175,8 +170,7 @@ namespace CovidNews.Controllers
         {
             string url = "countrydata/findcountry/" + id;
             HttpResponseMessage response = client.GetAsync(url).Result;
-            //Can catch the status code (200 OK, 301 REDIRECT), etc.
-            //Debug.WriteLine(response.StatusCode);
+
             if (response.IsSuccessStatusCode)
             {
                 //Put data into Country data transfer object
@@ -195,11 +189,10 @@ namespace CovidNews.Controllers
         public ActionResult Delete(int id)
         {
             string url = "countrydata/deletecountry/" + id;
-            //post body is empty
+
             HttpContent content = new StringContent("");
             HttpResponseMessage response = client.PostAsync(url, content).Result;
-            //Can catch the status code (200 OK, 301 REDIRECT), etc.
-            //Debug.WriteLine(response.StatusCode);
+
             if (response.IsSuccessStatusCode)
             {
 

@@ -251,35 +251,35 @@ namespace CovidNews.Controllers
         ///// <param name="countryid">The country id</param>
         ///// <param name="variantid">The Variant id</param>
         ///// <returns>status code of 200 OK</returns>
-        //[HttpGet]
-        //[Route("api/variantdata/novariant/{countryid}/{variantid}")]
-        //public IHttpActionResult Novariant(int countryid, int variantid)
-        //{
-        //    //First select the variant (also loading in country data)
-        //    Variant SelectedVariant = db.Variants
-        //        .Include(v => v.Countries)
-        //        .Where(v => v.VariantID == variantid)
-        //        .FirstOrDefault();
+        [HttpGet]
+        [Route("api/variantdata/novariant/{countryid}/{variantid}")]
+        public IHttpActionResult Novariant(int countryid, int variantid)
+        {
+           //First select the variant (also loading in country data)
+            Variant SelectedVariant = db.Variants
+            .Include(v => v.Countries)
+            .Where(v => v.VariantID == variantid)
+            .FirstOrDefault();
 
-        //    //Then select the country
-        //    Country SelectedCountry = db.Countries.Find(countryid);
+            //Then select the country
+        Country SelectedCountry = db.Countries.Find(countryid);
 
-        //    //Debug.WriteLine("Selected Variant is.. " + SelectedVariant.VariantName);
-        //    //Debug.WriteLine("Selected Country is.. " + SelectedCountry.CountryName);
+            Debug.WriteLine("Selected Variant is.. " + SelectedVariant.VariantName);
+            Debug.WriteLine("Selected Country is.. " + SelectedCountry.CountryName);
 
-        //    if (SelectedVariant == null || SelectedCountry == null || !SelectedVariant.Countries.Contains(SelectedCountry))
-        //    {
+            if (SelectedVariant == null || SelectedCountry == null || !SelectedVariant.Countries.Contains(SelectedCountry))
+            {
 
-        //        return NotFound();
-        //    }
-        //    else
-        //    {
-        //        //Remove the variant from the country
-        //        SelectedVariant.Countries.Remove(SelectedCountry);
-        //        db.SaveChanges();
-        //        return Ok();
-        //    }
-        //}
+                return NotFound();
+            }
+            else
+            {
+                //Remove the variant from the country
+                SelectedVariant.Countries.Remove(SelectedCountry);
+                db.SaveChanges();
+                return Ok();
+            }
+        }
 
 
 
@@ -289,35 +289,35 @@ namespace CovidNews.Controllers
         ///// <param name="countryid">The country id</param>
         ///// <param name="variantid">The Variant id</param>
         ///// <returns>status code of 200 OK</returns>
-        //[HttpGet]
-        //[Route("api/variantdata/variant/{countryid}/{variantid}")]
-        //public IHttpActionResult Variant(int countryid, int variantid)
-        //{
-        //    //First select the variant (also loading in country data)
-        //    Variant SelectedVariant = db.Variants
-        //        .Include(v => v.Countries)
-        //        .Where(v => v.VariantID == variantid)
-        //        .FirstOrDefault();
+        [HttpGet]
+        [Route("api/variantdata/variant/{countryid}/{variantid}")]
+        public IHttpActionResult Variant(int countryid, int variantid)
+        {
+            //First select the variant (also loading in country data)
+            Variant SelectedVariant = db.Variants
+                .Include(v => v.Countries)
+                .Where(v => v.VariantID == variantid)
+                .FirstOrDefault();
 
-        //    //Then select the country
-        //    Country SelectedCountry = db.Countries.Find(countryid);
+            //Then select the country
+            Country SelectedCountry = db.Countries.Find(countryid);
 
-        //    //Debug.WriteLine("Selected Variant Variant is.. " + SelectedVariant.VariantName);
-        //    //Debug.WriteLine("Selected Country is.. " + SelectedCountry.CountryName);
+            //Debug.WriteLine("Selected Variant Variant is.. " + SelectedVariant.VariantName);
+            //Debug.WriteLine("Selected Country is.. " + SelectedCountry.CountryName);
 
-        //    if (SelectedVariant == null || SelectedCountry == null || SelectedVariant.Countries.Contains(SelectedCountry))
-        //    {
+            if (SelectedVariant == null || SelectedCountry == null || SelectedVariant.Countries.Contains(SelectedCountry))
+            {
 
-        //        return NotFound();
-        //    }
-        //    else
-        //    {
-        //        //Remove the variant from the country
-        //        SelectedVariant.Countries.Add(SelectedCountry);
-        //        db.SaveChanges();
-        //        return Ok();
-        //    }
-        //}
+                return NotFound();
+            }
+            else
+            {
+                //Remove the variant from the country
+                SelectedVariant.Countries.Add(SelectedCountry);
+                db.SaveChanges();
+                return Ok();
+            }
+        }
 
 
 

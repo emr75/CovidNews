@@ -1,17 +1,17 @@
 ﻿@model CovidNews.Models.ViewModels.ShowArticle
+<head>
+    <link rel="stylesheet" href="~/Content/Articles/details.css">
+    <link rel="stylesheet" href="~/Content/Site.css">
+</head>
 
-@{
-    ViewBag.Title = "Details";
-}
 
-<h4>Article</h4>
+<h2>@Html.DisplayFor(model => model.article.ArticleName)</h2>
 
 <div>
-    <div>@Html.ActionLink("Delete", "DeleteConfirm", new { id = Model.article.ArticleID })</div>
     <hr />
     @{
         //Use server rendering to determine an image
-        string pic = "/Content/Articles/default.jpg";
+        string pic = "/Content/Articles/globe.jpg";
         string alt = "No Picture Provided.";
         if (Model.article.ArticleHasPic)
         {
@@ -19,7 +19,7 @@
             alt = "Profile shot of " + Model.article.ArticleName;
         }
     }
-    <div class="imagecontainer featured">
+    <div class="detailsImg">
         <img src="@pic" alt="@alt" />
     </div>
     <dl class="dl-horizontal">
@@ -48,7 +48,8 @@
 
     </dl>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.article.ArticleID }) |
-    @Html.ActionLink("Back to List", "List")
-</p>
+<div class="options">
+    <div class="editlink">@Html.ActionLink("Delete", "DeleteConfirm", new { id = Model.article.ArticleID })</div>
+    <span class="editlink backTwo"> @Html.ActionLink("Edit", "Edit", new { id = Model.article.ArticleID }) </span>
+    <span class="editlink backOne"> @Html.ActionLink("Back to List", "List")</span>
+</div>

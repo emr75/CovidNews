@@ -1,8 +1,9 @@
 ﻿@model CovidNews.Models.ViewModels.UpdateVariant
 
-@{
-    ViewBag.Title = "View";
-}
+<head>
+    <link rel="stylesheet" href="~/Content/Articles/create.css">
+    <link rel="stylesheet" href="~/Content/Site.css">
+</head>
 
 <h2>Update Variant</h2>
 
@@ -36,7 +37,7 @@
         <div style="width:39%; margin: 0 auto; float:left;">
             <h4>Countries with Variant:</h4>
             <div>
-                @foreach (var country in Model.variantincountries)
+                @foreach (var country in Model.variantcountries)
                 {
                     <div>
                         @Html.ActionLink(

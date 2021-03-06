@@ -1,24 +1,15 @@
 ﻿@model CovidNews.Models.ViewModels.ShowCountry
 
-@{
-    ViewBag.Title = "Details";
-}
+<head>
+    <link rel="stylesheet" href="~/Content/Countries/cList.css">
+    <link rel="stylesheet" href="~/Content/Site.css">
+</head>
 
-<h4>Country @Model.country.CountryName</h4>
-<div style="overflow:hidden;">
-    <div style="float:left; marign-right:2%; width:49%;">
+<h2>@Model.country.CountryName</h2>
+<div>
+    <div>
 
-        <div>@Html.ActionLink("Delete", "DeleteConfirm", new { id = Model.country.CountryID })</div>
-
-        <dl class="dl-horizontal">
-            <dt>
-                @Html.DisplayNameFor(model => model.country.CountryName)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.country.CountryName)
-            </dd>
-
+        <dl class="dl-horizontal marginz">
             <dt>
                 @Html.DisplayNameFor(model => model.country.Population)
             </dt>
@@ -26,14 +17,28 @@
             <dd>
                 @Html.DisplayFor(model => model.country.Population)
             </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.country.Infected)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.country.Infected)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.country.Vaccinated)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.country.Vaccinated)
+            </dd>
 
         </dl>
     </div>
-    <div style="float:left;margin-right:0%; width:49%;">
+    <div>
         <div>
-            <h4>Articles:</h4>
+            <h3>Articles:</h3>
             <div>
-                @foreach (var article in Model.countryarticles)
+                @foreach (var article in Model.Countryarticles)
                 {
                     <div>
                         @Html.ActionLink(
@@ -47,9 +52,9 @@
             </div>
         </div>
         <div>
-            <h4>Variants:</h4>
+            <h3 id="variants">Variants:</h3>
             <div>
-                @foreach (var variant in Model.countryvariants)
+                @foreach (var variant in Model.Countryvariants)
                 {
                     <div>
                         @Html.ActionLink(
@@ -68,4 +73,6 @@
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.country.CountryID }) |
     @Html.ActionLink("Back to List", "List")
+
+    <div>@Html.ActionLink("Delete", "DeleteConfirm", new { id = Model.country.CountryID })</div>
 </p>

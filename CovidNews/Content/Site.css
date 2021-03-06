@@ -1,22 +1,32 @@
 ﻿﻿body {
     padding-top: 50px;
     padding-bottom: 20px;
-    background-color: lightgray;
+    background-color: #d7e2ff;
 }
 /* Set padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
 }
-.mainNav {
-    background-color: #8b0000;
+.mainNav,
+footer {
+    background-color: black;
 }
+
 .mainNav a {
-    color: black;
+    color: white;
     font-size: x-large;
+}
+.mainNav a:hover {
+   color: red;
 }
 nav .navbar-nav li:first-child {
     font-size: xx-large;
+}
+footer {
+    color: white;
+    font-size: 1.5em;
+    padding: 1em;
 }
 /* Override the default bootstrap behavior where horizontal description lists 
    will truncate terms that are too long to fit in the left column 
@@ -46,6 +56,7 @@ textarea {
 
 ._record {
     padding: 10px;
+    height: 33em;
 }
 
 .recordtitle {
@@ -53,11 +64,8 @@ textarea {
     margin-top: 15px;
 }
 
-.imagecontainer {
-    border-radius: 50%;
+.contain {
     overflow: hidden;
-    width: 80%;
-    margin: 0 auto;
 }
 
     .imagecontainer.featured {
@@ -79,6 +87,26 @@ textarea {
 
 .editlink {
     float: right;
+    font-size: large;
+    padding: 1em;
+}
+.backOne {
+    border-right: 1px solid black;
+}
+
+.backTwo {
+    margin-left: 1em;
+}
+.options {
+    margin-bottom: 6em;
+}
+.options1 {
+    padding-bottom: 6em;
+}
+    .editlink:first-child {
+        margin-left: 1.7em;
+        border-left: 1px solid black;
+        padding-left: 1.7em;
 }
 
 .record-container {

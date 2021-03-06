@@ -9,9 +9,9 @@ namespace CovidNews.Models.ViewModels
     {
         //base information about the variant
         public VariantDto variant { get; set; }
-        //display all countries that this variant is in
-        public IEnumerable<CountryDto> variantincountries { get; set; }
-        //display countries which could have the varaint in a dropdownlist
+        //all countries that this variant is in
+        public IEnumerable<CountryDto> variantcountries { get; set; }
+        //countries which could have the varaint 
         public IEnumerable<CountryDto> allcountries { get; set; }
     }
 }

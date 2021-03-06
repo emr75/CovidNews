@@ -1,8 +1,8 @@
 ﻿@model CovidNews.Models.ArticleDto
-
-@{
-    ViewBag.Title = "View";
-}
+<head>
+    <link rel="stylesheet" href="~/Content/Articles/articles.css">
+    <link rel="stylesheet" href="~/Content/Site.css">
+</head>
 
 <h2>View</h2>
 
@@ -32,9 +32,9 @@
     {
         @Html.AntiForgeryToken()
 
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "List")
-        </div>
+<div class="options1">
+    <span class="editlink"><input type="submit" value="Delete" /></span>
+    <span class="editlink"> @Html.ActionLink("Back to List", "List")</span>
+</div>
     }
 </div>
